@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>推荐题目</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                        danger: '#EF4444',
+                        neutral: '#64748B'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .btn-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .section-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300;
+            }
+            .section-card:hover {
+                @apply shadow-lg;
+            }
+            .answer-appear {
+                @apply transition-all duration-500 opacity-0;
+            }
+            .answer-appear.active {
+                @apply opacity-100;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light font-inter min-h-screen flex flex-col">
+    <!-- 页眉区域 -->
+    <header class="bg-white p-4 shadow-md flex justify-between items-center">
+        <!-- 返回按钮 -->
+        <button id="back-button" class="bg-gray-100 hover:bg-gray-200 text-dark font-medium py-2 px-4 rounded-lg shadow-sm btn-hover flex items-center">
+            <i class="fa-solid fa-arrow-left mr-2"></i>
+            返回
+        </button>
+        
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow p-4 md:p-8">
+        <div class="container mx-auto max-w-4xl">
+            <!-- 题目卡片 -->
+            <div class="section-card">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-dark mb-2">推荐题目</h2>
+                    <p class="text-neutral">数学 · 二次函数</p>
+                </div>
+                
+                <!-- 题目内容 -->
+                <div id="question-content" class="prose max-w-none mb-8">
+                    <p class="text-gray-700 mb-4">已知二次函数 \( f(x) = ax^2 + bx + c \) 的图像经过点 \( (1, 3) \)、\( (2, 0) \) 和 \( (-1, -5) \)，求 \( a \)、\( b \)、\( c \) 的值。</p>
+                </div>
+                
+                <!-- 答案内容 (默认隐藏) -->
+                <div id="answer-content" class="prose max-w-none bg-blue-50 p-6 rounded-lg answer-appear">
+                    <h4 class="font-bold text-primary mb-2">正确答案：</h4>
+                    <p class="text-gray-700">将三个点代入函数得到方程组：</p>
+                    <p class="text-gray-700 mt-2">\[
+                        \begin{cases}
+                            a + b + c = 3 \\
+                            4a + 2b + c = 0 \\
+                            a - b + c = -5
+                        \end{cases}
+                    \]</p>
+                    <p class="text-gray-700 mt-2">解得：\( a = -1 \)，\( b = 4 \)，\( c = 0 \)，即 \( f(x) = -x^2 + 4x \)。</p>
+                    
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold text-secondary mt-4 mb-2">解题思路：</h4>
+                        <ol class="list-decimal pl-5 text-gray-700 space-y-2">
+                            <li>将三个点的坐标代入二次函数，得到三个方程</li>
+                            <li>通过消元法解方程组，先消去 \( c \)</li>
+                            <li>解得 \( a \) 和 \( b \) 的值后，代入任一方程求 \( c \)</li>
+                            <li>验证解是否满足所有三个方程</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 按钮区域 -->
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <!-- 查看答案按钮 -->
+                <button id="show-answer" class="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-xl shadow-md btn-hover flex items-center justify-center">
+                    <i class="fa-solid fa-eye mr-2"></i>
+                    查看答案
+                </button>
+                
+                <!-- 再来一题按钮 -->
+                <button id="next-question" class="bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-8 rounded-xl shadow-md btn-hover flex items-center justify-center">
+                    <i class="fa-solid fa-refresh mr-2"></i>
+                    再来一题
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 返回按钮点击事件
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+        
+        // 查看答案按钮点击事件
+        const showAnswerBtn = document.getElementById('show-answer');
+        const answerContent = document.getElementById('answer-content');
+        
+        showAnswerBtn.addEventListener('click', function() {
+            // 切换答案显示状态
+            answerContent.classList.toggle('active');
+            
+            // 更改按钮文本和图标
+            if (answerContent.classList.contains('active')) {
+                showAnswerBtn.innerHTML = '<i class="fa-solid fa-eye-slash mr-2"></i> 隐藏答案';
+            } else {
+                showAnswerBtn.innerHTML = '<i class="fa-solid fa-eye mr-2"></i> 查看答案';
+            }
+        });
+        
+        // 再来一题按钮点击事件
+        document.getElementById('next-question').addEventListener('click', function() {
+            // 显示加载动画
+            const questionContent = document.getElementById('question-content');
+            questionContent.innerHTML = '<div class="flex justify-center items-center py-8"><i class="fa-solid fa-spinner fa-spin text-primary text-2xl"></i></div>';
+            
+            // 隐藏答案
+            answerContent.classList.remove('active');
+            showAnswerBtn.innerHTML = '<i class="fa-solid fa-eye mr-2"></i> 查看答案';
+            
+            // 模拟加载新题目 (实际应用中应该从服务器获取)
+            setTimeout(function() {
+                // 随机选择一个新题目
+                const questions = [
+                    {
+                        question: '已知二次函数 \( f(x) = ax^2 + bx + c \) 的图像经过点 \( (0, 2) \)、\( (1, 1) \) 和 \( (-1, 5) \)，求 \( a \)、\( b \)、\( c \) 的值。',
+                        answer: '<h4 class="font-bold text-primary mb-2">正确答案：</h4><p class="text-gray-700">将三个点代入函数得到方程组：</p><p class="text-gray-700 mt-2">\[\\begin{cases}c = 2 \\\\a + b + c = 1 \\\\a - b + c = 5\\end{cases}\\\]</p><p class="text-gray-700 mt-2">解得：\( a = 1 \)，\( b = -2 \)，\( c = 2 \)，即 \( f(x) = x^2 - 2x + 2 \)。</p>'
+                    },
+                    {
+                        question: '已知二次函数 \( f(x) = ax^2 + bx + c \) 的顶点坐标为 \( (2, -3) \)，且经过点 \( (0, 5) \)，求 \( a \)、\( b \)、\( c \) 的值。',
+                        answer: '<h4 class="font-bold text-primary mb-2">正确答案：</h4><p class="text-gray-700">顶点式为 \( f(x) = a(x - 2)^2 - 3 \)，代入点 \( (0, 5) \) 得：</p><p class="text-gray-700 mt-2">\[5 = a(0 - 2)^2 - 3 \\\\8 = 4a \\\\a = 2\]</p><p class="text-gray-700 mt-2">展开得：\( f(x) = 2(x - 2)^2 - 3 = 2x^2 - 8x + 5 \)，即 \( a = 2 \)，\( b = -8 \)，\( c = 5 \)。</p>'
+                    },
+                    {
+                        question: '已知二次函数 \( f(x) = x^2 + bx + c \) 的图像与 \( x \) 轴交于点 \( (-1, 0) \) 和 \( (3, 0) \)，求 \( b \) 和 \( c \) 的值。',
+                        answer: '<h4 class="font-bold text-primary mb-2">正确答案：</h4><p class="text-gray-700">根据根与系数的关系：</p><p class="text-gray-700 mt-2">\[\\begin{cases}-1 + 3 = -b \\\\-1 \\times 3 = c\\end{cases}\\\]</p><p class="text-gray-700 mt-2">解得：\( b = -2 \)，\( c = -3 \)，即 \( f(x) = x^2 - 2x - 3 \)。</p>'
+                    }
+                ];
+                
+                const randomIndex = Math.floor(Math.random() * questions.length);
+                const randomQuestion = questions[randomIndex];
+                
+                // 更新题目内容
+                questionContent.innerHTML = `<p class="text-gray-700 mb-4">${randomQuestion.question}</p>`;
+                
+                // 更新答案内容
+                answerContent.innerHTML = randomQuestion.answer + `
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold text-secondary mt-4 mb-2">解题思路：</h4>
+                        <ol class="list-decimal pl-5 text-gray-700 space-y-2">
+                            <li>根据已知条件列出方程或方程组</li>
+                            <li>利用代数方法求解未知数</li>
+                            <li>验证解是否满足所有条件</li>
+                            <li>写出最终的二次函数表达式</li>
+                        </ol>
+                    </div>
+                `;
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

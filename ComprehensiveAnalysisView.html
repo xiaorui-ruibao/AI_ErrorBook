@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>综合分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                        danger: '#EF4444',
+                        amber: '#F59E0B',
+                        neutral: '#64748B'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .btn-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .section-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300;
+            }
+            .section-card:hover {
+                @apply shadow-lg;
+            }
+            .progress-bar {
+                @apply h-3 rounded-full bg-gray-200 overflow-hidden;
+            }
+            .progress-value {
+                @apply h-full rounded-full transition-all duration-1000;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light font-inter min-h-screen flex flex-col">
+    <!-- 页眉区域 -->
+    <header class="bg-white p-4 shadow-md flex justify-between items-center">
+        <!-- 返回按钮 -->
+        <button id="back-button" class="bg-gray-100 hover:bg-gray-200 text-dark font-medium py-2 px-4 rounded-lg shadow-sm btn-hover flex items-center">
+            <i class="fa-solid fa-arrow-left mr-2"></i>
+            返回
+        </button>
+        
+        <h1 class="text-xl font-bold text-dark">综合分析</h1>
+        
+        <!-- 右侧留空，保持布局平衡 -->
+        <div class="w-10"></div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow p-4 md:p-8">
+        <div class="container mx-auto max-w-6xl">
+            <!-- 数据概览卡片 -->
+            <div class="section-card mb-8">
+                <h2 class="text-xl font-bold text-dark mb-4">学习数据概览</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-primary">总错题数</h3>
+                            <span class="text-2xl font-bold text-primary">28</span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">较上周 <span class="text-green-500">↓5题</span></div>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-secondary">已掌握题数</h3>
+                            <span class="text-2xl font-bold text-secondary">12</span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">较上周 <span class="text-green-500">↑3题</span></div>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-amber">正确率</h3>
+                            <span class="text-2xl font-bold text-amber">65%</span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">较上周 <span class="text-green-500">↑8%</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 上下均分区域 -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- 薄弱知识点分析 -->
+                <div class="section-card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-dark flex items-center">
+                            <i class="fa-solid fa-lightbulb text-primary mr-3"></i>
+                            薄弱知识点分析
+                        </h2>
+                        <span class="bg-blue-100 text-primary text-sm font-medium px-3 py-1 rounded-full">
+                            需重点关注
+                        </span>
+                    </div>
+                    
+                    <!-- 知识点列表 -->
+                    <div class="space-y-6">
+                        <!-- 知识点1 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">二次函数</span>
+                                <span class="text-danger font-medium">正确率 30%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value bg-danger" style="width: 30%"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">错误主要集中在求解析式和应用问题，需加强练习</p>
+                        </div>
+                        
+                        <!-- 知识点2 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">一元二次方程</span>
+                                <span class="text-amber font-medium">正确率 45%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value bg-amber" style="width: 45%"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">因式分解和根的判别式理解不足，建议复习基础</p>
+                        </div>
+                        
+                        <!-- 知识点3 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">几何证明</span>
+                                <span class="text-amber font-medium">正确率 55%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value bg-amber" style="width: 55%"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">辅助线添加和定理应用不熟练，需加强专项训练</p>
+                        </div>
+                        
+                        <!-- 知识点4 -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">概率统计</span>
+                                <span class="text-secondary font-medium">正确率 75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value bg-secondary" style="width: 75%"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">基本掌握，需注意复杂问题的分析思路</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 查看全部按钮 -->
+                    <button class="mt-6 w-full text-primary hover:text-primary/80 font-medium flex items-center justify-center btn-hover">
+                        <span>查看全部薄弱知识点</span>
+                        <i class="fa-solid fa-chevron-down ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- 学习计划及建议 -->
+                <div class="section-card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-dark flex items-center">
+                            <i class="fa-solid fa-calendar-check text-secondary mr-3"></i>
+                            学习计划与建议
+                        </h2>
+                        <span class="bg-green-100 text-secondary text-sm font-medium px-3 py-1 rounded-full">
+                            个性化定制
+                        </span>
+                    </div>
+                    
+                    <!-- 学习建议 -->
+                    <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                        <h3 class="font-semibold text-primary mb-2">AI学习建议</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li>针对二次函数薄弱点，建议先复习基本概念，再进行专项练习</li>
+                            <li>几何证明部分需要多总结常见辅助线添加方法和证明思路</li>
+                            <li>建议每天花30分钟进行错题回顾和知识点巩固</li>
+                            <li>下周安排一次模拟测试，检验学习效果</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 本周学习计划 -->
+                    <div>
+                        <h3 class="font-semibold text-dark mb-3">本周学习计划</h3>
+                        <div class="space-y-4">
+                            <!-- 计划项1 -->
+                            <div class="flex items-start p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 mt-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <i class="fa-solid fa-book"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="font-medium text-dark">二次函数专项练习</h4>
+                                    <p class="text-sm text-gray-500">完成20道二次函数综合题，重点关注解析式求解和最值问题</p>
+                                    <div class="mt-1 flex items-center text-xs text-gray-500">
+                                        <span>今日 19:00-20:00</span>
+                                        <span class="mx-2">•</span>
+                                        <span>预计60分钟</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 计划项2 -->
+                            <div class="flex items-start p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 mt-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                                        <i class="fa-solid fa-pencil-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="font-medium text-dark">几何证明错题整理</h4>
+                                    <p class="text-sm text-gray-500">整理最近30道几何证明错题，分析错误原因</p>
+                                    <div class="mt-1 flex items-center text-xs text-gray-500">
+                                        <span>明日 20:00-21:00</span>
+                                        <span class="mx-2">•</span>
+                                        <span>预计45分钟</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 计划项3 -->
+                            <div class="flex items-start p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 mt-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-amber/10 flex items-center justify-center text-amber">
+                                        <i class="fa-solid fa-flask"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="font-medium text-dark">一元二次方程测试</h4>
+                                    <p class="text-sm text-gray-500">进行一次限时测试，检验学习成果</p>
+                                    <div class="mt-1 flex items-center text-xs text-gray-500">
+                                        <span>周五 19:30-20:30</span>
+                                        <span class="mx-2">•</span>
+                                        <span>预计45分钟</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 返回按钮点击事件
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+        
+        // 为进度条添加动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-value');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+
+</html>

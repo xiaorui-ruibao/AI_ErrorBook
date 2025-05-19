@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>设置</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                        danger: '#EF4444',
+                        amber: '#F59E0B',
+                        neutral: '#64748B'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .btn-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .section-card {
+                @apply bg-white rounded-xl shadow-md p-6 mb-6 transition-all duration-300;
+            }
+            .section-card:hover {
+                @apply shadow-lg;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light font-inter min-h-screen flex flex-col">
+    <!-- 页眉区域 -->
+    <header class="bg-white p-4 shadow-md flex justify-between items-center">
+        <!-- 返回按钮 -->
+        <button id="back-button" class="bg-gray-100 hover:bg-gray-200 text-dark font-medium py-2 px-4 rounded-lg shadow-sm btn-hover flex items-center">
+            <i class="fa-solid fa-arrow-left mr-2"></i>
+            返回
+        </button>
+        
+        <h1 class="text-xl font-bold text-dark">设置</h1>
+        
+        <!-- 右侧留空，保持布局平衡 -->
+        <div class="w-10"></div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow p-4 md:p-8">
+        <div class="container mx-auto max-w-3xl">
+            <!-- 设置选项卡片 -->
+            <div class="section-card">
+                <!-- 退出登录按钮 -->
+                <button id="logout-button" class="w-full bg-amber hover:bg-amber/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md btn-hover mb-4 flex items-center justify-between">
+                    <span>退出登录</span>
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                </button>
+                
+                <!-- 修改密码按钮 -->
+                <button id="change-password" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md btn-hover mb-4 flex items-center justify-between">
+                    <span>修改密码</span>
+                    <i class="fa-solid fa-key"></i>
+                </button>
+                
+                <!-- 注销账户按钮 -->
+                <button id="delete-account" class="w-full bg-danger hover:bg-danger/90 text-white font-semibold py-3 px-6 rounded-lg shadow-md btn-hover flex items-center justify-between">
+                    <span>注销账户</span>
+                    <i class="fa-solid fa-user-times"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 返回按钮点击事件
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+        
+        // 退出登录按钮点击事件
+        document.getElementById('logout-button').addEventListener('click', function() {
+            // 显示确认对话框
+            if (confirm('确定要退出登录吗？')) {
+                // 跳转到登录界面
+                window.location.href = 'LoginRegisterView.html';
+            }
+        });
+        
+        // 修改密码按钮点击事件 (仅占位)
+        document.getElementById('change-password').addEventListener('click', function() {
+            alert('修改密码功能暂未实现');
+        });
+        
+        // 注销账户按钮点击事件 (仅占位)
+        document.getElementById('delete-account').addEventListener('click', function() {
+            alert('注销账户功能暂未实现');
+        });
+    </script>
+</body>
+
+</html>

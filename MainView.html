@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1">
+        <title>AI错题本</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#3B82F6',
+                            secondary: '#10B981',
+                            accent: '#8B5CF6',
+                            dark: '#1F2937',
+                            light: '#F9FAFB'
+                        },
+                        fontFamily: {
+                            inter: ['Inter', 'system-ui', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+                .btn-hover {
+                    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+                }
+                .bg-gradient-custom {
+                    @apply bg-gradient-to-br from-primary/90 to-accent/90;
+                }
+            }
+        </style>
+    </head>
+
+
+    <body>
+
+        <!-- 主内容区 -->
+        <main class="flex-grow flex items-center justify-center p-4 md:p-8">
+            <div class="container mx-auto max-w-3xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark mb-4">AI错题本</h2>
+                </div>
+                
+                <!-- 按钮区域 -->
+                <div class="flex flex-col items-center justify-center space-y-6 md:space-y-8">
+                    <!-- 上传错题按钮 -->
+                    <button id="MainToUpload" class="w-full md:w-2/3 lg:w-1/2 bg-primary hover:bg-primary/90 text-white font-semibold py-5 px-6 rounded-xl shadow-md btn-hover flex items-center justify-center">
+                        <i class="fa-solid fa-cloud-upload mr-3 text-xl"></i>
+                        <span  class="text-lg md:text-xl">上传错题</span>
+                    </button>
+                    
+                    <!-- 查看错题按钮 -->
+                    <button id="MainToErrorBook" class="w-full md:w-2/3 lg:w-1/2 bg-secondary hover:bg-secondary/90 text-white font-semibold py-5 px-6 rounded-xl shadow-md btn-hover flex items-center justify-center">
+                        <i class="fa-solid fa-list-alt mr-3 text-xl"></i>
+                        <span  class="text-lg md:text-xl">查看错题</span>
+                    </button>
+                    
+                    <!-- 设置按钮 -->
+                    <button id="MainToSettings" class="w-full md:w-2/3 lg:w-1/2 bg-accent hover:bg-accent/90 text-white font-semibold py-5 px-6 rounded-xl shadow-md btn-hover flex items-center justify-center">
+                        <i class="fa-solid fa-cog mr-3 text-xl"></i>
+                        <span class="text-lg md:text-xl">设置</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <script>
+            document.getElementById('MainToUpload').addEventListener('click', function () {
+                window.location.href = 'UploadView.html';
+            });
+            document.getElementById('MainToErrorBook').addEventListener('click', function () {
+                window.location.href = 'ErrorBookView.html';
+            });
+            document.getElementById('MainToSettings').addEventListener('click', function () {
+                window.location.href = 'SettingsView.html';
+            });
+        </script>
+        
+    </body>
+
+
+
+</html>
